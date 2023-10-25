@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap JavaScript and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+                <h2 class="card-title">Registration</h2>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="mess_name" class="form-label">Mess Name</label>
+                    <input type="text" class="form-control" id="mess_name" placeholder="Enter Mess Name" name="mess_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="Enter your username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="number_field" class="form-label">Phone number</label>
+                    <input type="text" class="form-control" id="number" placeholder="Enter your Number" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            {% if error_message %}
+            <div class="alert alert-danger mt-2" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <p class="login-link mt-3">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
