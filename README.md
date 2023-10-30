@@ -55,6 +55,11 @@ cd Mess-Management/
 ```
 python manage.py runserver
 ```
+- Or 
+```
+python3 manage.py runserver
+```
+
 This will start the development server, and you can access the project in your web browser at [http://localhost:8000/](http://localhost:8000/).
 
 ---
