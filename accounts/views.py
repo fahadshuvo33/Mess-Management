@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from accounts.forms import UserRegistrationForm  
-from accounts.models import CustomUser  
+from accounts.models import CustomUser, Mess , Mess_Admin
 from django.contrib.auth import get_user_model
 
 
@@ -23,7 +23,6 @@ def LoginPage(request):
 
     return render(request, 'login.html')
 
-
 def RegisterPage(request):
     if request.method == 'POST':
         mess_name = request.POST.get('mess_name')
@@ -32,12 +31,17 @@ def RegisterPage(request):
         phone = request.POST.get('phone')
         password = request.POST.get('password')
 
+        mess_admin = Mess_Admin.objects.create(name=username)
+        mess_admin.save()
+        mess = Mess.objects.create(name=mess_name,admin=mess_admin)
+        mess.save()
+
         user = CustomUser.objects.create(
-            mess_name=mess_name,
             username=username,
             email=email,
             phone=phone,
-            is_admin=True
+            is_admin=True,
+            mess = mess
         )
         user.set_password(password)
         user.save()
@@ -48,6 +52,30 @@ def RegisterPage(request):
             return redirect('home') 
 
     return render(request, 'register.html')
+
+
+
+def add_member(request):
+    mess = request.user.mess
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+
+        user = CustomUser.objects.create(
+            mess = mess,
+            username=username,
+            email=email,
+            phone=phone,
+            is_admin=False
+        )
+        user.set_password(password)
+        user.save()
+        return redirect('members_info')
+
+    return render(request,'add_member.html')
+
 
 def LogoutPage(request) :
     logout(request)

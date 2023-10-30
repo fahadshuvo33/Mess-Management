@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+                <h2 class="card-title" Style = "text-align: center;">Add Bazar</h2>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="inputdate" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="inputdate" placeholder="Select Date" name="date" required value="{{ today_date }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputuser" class="form-label">Member</label>
+                    <select class="form-control" id="inputuser" name="user">
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputamount" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="inputamount" placeholder="Enter your Bazar Amount" name="amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputnote" class="form-label">Note</label>
+                    <input type="text" class="form-control" id="inputnote" placeholder="Write a Note" name="note" style="width: 100%; height: 100px;">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

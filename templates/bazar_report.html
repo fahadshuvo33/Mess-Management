@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="list-group mb-4 pb-2">
+    <p Style = "text-align: center; color : #000000; font-weight: bold;"> Bazar's List</p>
+    {% for bazar in bazars %}
+        <li class="list-group-item border-0 mb-2 rounded" style="background-color: #f4f6f7; margin-left: 75px; margin-right: 75px;">
+            <div class="d-flex align-items-center justify-content-between ml-3">
+                <div class="d-flex">
+                    <p class="mb-0 ml-2" style="color: #000000 ; font-size : 18px; text-align: center; ">{{ bazar.user }}</p>    
+                </div>
+                <div class="d-flex">
+                    <p class="mb-0 ml-2" style="color: #000000 ; font-size : 18px; text-align: center; ">{{ bazar.date }}</p>        
+                    
+                </div>
+                <div class="d-flex">
+                    <p class="mb-0 ml-2" style="color: #000000 ; font-size : 18px; text-align: center; ">{{ bazar.amount }}</p> 
+                </div>
+
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

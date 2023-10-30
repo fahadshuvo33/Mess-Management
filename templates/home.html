@@ -1,19 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Include Bootstrap JavaScript and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-<p> Home Page </p>
-<button onclick="location.href = '{% url 'logout' %}'">Logout</button>
-</body>
-</html>
+{% include 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <div class="form-group">
+                        <label for="start_date">Date From</label>
+                        <input type="date" id="start_date" name="start_date" value="2023-10-01">
+                    </div>
+                </th>
+                <th scope="col"></th>
+                <th scope="col">
+                    <div class="form-group">
+                        <label for="stop_date">To</label>
+                        <input type="date" id="stop_date" name="stop_date" value="2023-10-31">
+                    </div>
+                </th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="col-md-12 row" id="totalBazarArea">
+        Loading...
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on('click', '.clickmeal', function () {
+            $(this).find('.showmeal').show();
+            $(this).find(".click_input").show();
+            $(this).find('input').focus();
+        });
+        $(document).on('click', '.savemeal', function () {
+            var mealdate = $(this).attr('data-date');
+            var mealid = $(this).attr('data-id');
+            var userid = $(this).attr('user-id');
+            var mealqty = $(this).parent().find('input').val();
+            $(this).parent().parent().parent().parent().find('.updateval').html(mealqty);
+            $.post('mealsave.php', { mealdate: mealdate, mealid: mealid, userid: userid, mealqty: mealqty }, function (data) {
+                $(".click_input").hide();
+                alert(data);
+            });
+        });
+    });
+
+    $(function () {
+        function loadTotalBazar(fromDate, toDate) {
+            $.post('load_meal_count_all.php', { fromDate: fromDate, toDate: toDate }, function (data) {
+                $('#totalBazarArea').html(data)
+            });
+        }
+
+        function callLoadTotalBazar() {
+            var sdate = $('#start_date').val();
+            var edate = $('#stop_date').val();
+            if (sdate !== '' && edate !== '') {
+                loadTotalBazar(sdate, edate);
+            } else {
+                alert('Both date fields cannot be blank');
+            }
+        }
+
+        loadTotalBazar("2023-10-01", "2023-10-31");
+
+        $('#start_date').change(function () {
+            callLoadTotalBazar();
+        });
+
+        $('#stop_date').change(function () {
+            callLoadTotalBazar();
+        });
+    });
+</script>
+{% endblock content %}

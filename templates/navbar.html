@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'Sidebar/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Sidebar/css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Sidebar/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'Sidebar/css/style.css' %}">
+
+    <title>Sidebar</title>
+  </head>
+  <body>
+  
+    
+    <aside class="sidebar">
+      <div class="toggle">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span></span>
+            </a>
+      </div>
+      <div class="side-inner">
+
+        <div class="profile">
+    <img src="{% static 'Sidebar/images/person_profile.jpg' %}" alt="Image" class="img-fluid">
+    <h3 class="name">{{ user.username }}</h3>
+    <span class="country">
+        {% if user.is_admin %}
+            Mess Admin
+        {% else %}
+            Member
+        {% endif %}
+    </span>
+</div>
+
+        
+        <div class="nav-menu">
+          <ul>
+            <li class="active"><a href="{% url 'summary' %}"><span class="icon-home mr-3"></span>Summary</a></li>
+            <li><a href="{% url 'add_bazar' %}"><span class="icon-search2 mr-3"></span>Add Bazar</a></li>
+            <li><a href="{% url 'bazar_report' %}"><span class="icon-search2 mr-3"></span>Bazar Report</a></li>
+            <li><a href="{% url 'meal_report' %}"><span class="icon-notifications mr-3"></span>Meal Report</a></li>
+            <li><a href="{% url 'add_member' %}"><span class="icon-location-arrow mr-3"></span>Add Member</a></li>
+            <li><a href="{% url 'members_info' %}"><span class="icon-pie-chart mr-3"></span>Members Info</a></li>
+            <li><a href="{% url 'logout' %}"><span class="icon-sign-out mr-3"></span>Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </aside>
+
+    <script src="{% static 'Sidebar/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Sidebar/js/popper.min.js' %}"></script>
+    <script src="{% static 'Sidebar/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Sidebar/js/main.js' %}"></script>
+  </body>
+</html>
