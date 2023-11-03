@@ -10,13 +10,13 @@ from django.contrib.auth import get_user_model
 
 def LoginPage(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        email = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
             # Redirect to a success page or dashboard
-            return redirect('home')  # Replace 'dashboard' with the actual URL name
+            return redirect('dashboard')  # Replace 'dashboard' with the actual URL name
         else:
             # Handle invalid login credentials (e.g., show an error message)
             return render(request, 'login.html', {'error': 'Invalid email or password'})
@@ -49,7 +49,7 @@ def RegisterPage(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home') 
+            return redirect('dashboard') 
 
     return render(request, 'register.html')
 

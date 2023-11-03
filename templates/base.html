@@ -1,7 +1,18 @@
-{% include 'navbar.html' %}
-<h1 class="centered-heading" Style = "text-align: center; padding-top: 20px; ">{{user.mess.name}}</h1>
-<hr style="border: none; border-top: 1px solid #ccc; width: 100%; margin: 20px 0; padding: 0;">
-{% block content %}
-    
-{% endblock content %}
-    
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Django Tailwind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-700 font-serif leading-normal tracking-normal dark:bg-gray-700 dark:border-gray-600"">
+	{% include 'nav-side.html' %}
+    <div class="px-8 py-8 ml-64 mt-10 "> <!-- Add padding to create space for navbar -->
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

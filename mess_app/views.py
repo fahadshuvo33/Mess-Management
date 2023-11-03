@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse , get_object_or_404
 from accounts.models import CustomUser, Mess
-from mess_app.models import Bazar_List
+from mess_app.models import Bazar_List, Meal
 from django.contrib.auth import get_user_model
 from datetime import date
 
@@ -15,13 +15,18 @@ def members_info(request) :
 
 
 
-def meal_report(request) :
-    return render(request, 'meal_report.html')
+def meal_sheet(request) :
+    meals = Meal.objects.all()
+
+    data = {
+        'meals': meals,
+    }
+    return render(request, 'meal_sheet.html', data)
 
 
 
-def summary(request) :
-    return render(request, 'summary.html')
+def dashboard(request) :
+    return render(request, 'dashboard.html')
 
 
 
@@ -52,7 +57,17 @@ def add_bazar(request) :
 
     return render(request, 'add_bazar.html' , data)
 
-def bazar_report(request) :
+def all_bazar(request) :
     bazars = Bazar_List.objects.filter(mess = request.user.mess)
 
-    return render(request, 'bazar_report.html',{'bazars': bazars})
+    return render(request, 'all_bazar.html',{'bazars': bazars})
+
+
+def my_bazar(request) :
+    bazars = Bazar_List.objects.filter(mess = request.user.mess, user = request.user)
+
+    return render(request, 'all_bazar.html',{'bazars': bazars})
+
+
+def utility(request) :
+    return render(request, 'dashboard.html')

@@ -1,34 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <div class="card-header">
-                <h2 class="card-title" Style = "text-align: center;">Member Registration</h2>
+
+{% load static tailwind_tags %}
+{% tailwind_css %}
+
+<div class="h-screen flex items-center justify-center">
+    <div class="w-full max-w-md p-6 mx-auto my-auto bg-transparent rounded-lg shadow-md dark:bg-gray-800">
+        <p class="text-2xl font-bold text-center text-gray-800 dark:text-gray-400 mb-4">Add Member</p>
+
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="username" class="block text-sm text-gray-800 dark:text-gray-200">Username</label>
+                <input type="text" name="username" class="block w-full px-4 py-2 mt-1 text-gray-700 bg-transparent border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 " />
             </div>
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="inputUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="inputUsername" placeholder="Enter your username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="number_field" class="form-label">Phone number</label>
-                    <input type="text" class="form-control" id="number" placeholder="Enter your Number" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter your password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
-        </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm text-gray-800 dark:text-gray-200">Email</label>
+                <input type="email" name="email" class="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600" />
+            </div>
+
+            <div class="mb-4">
+                <label for="phone" class="block text-sm text-gray-800 dark:text-gray-200">Phone Number</label>
+                <input type="text" name="phone" class="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600" />
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm text-gray-800 dark:text-gray-200">Password</label>
+                <input type="password" name="password" class="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 " />
+            </div>
+
+            <div class="mb-4">
+                <button class="w-full px-6 py-2.5 text-sm font-medium tracking-wide text-gray-800 bg-white rounded-lg hover:bg-gray-400 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50 focus:ring focus:ring-opacity-40">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
+
 {% endblock content %}

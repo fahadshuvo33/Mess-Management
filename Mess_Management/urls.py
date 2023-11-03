@@ -25,6 +25,9 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('mess_app.urls')),
 
+
+    path("__reload__/", include("django_browser_reload.urls")),
+
 ]
 
 if settings.DEBUG:
